@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171717"><meta name="description" content="Gaming news, updates and community talk.">
+  <title>GamersNews — Gaming, without the noise</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">GN</span><span>Gamers<span class="accent">News</span></span></a><nav><a class="active" href="index.html">Home</a><a href="roblox.html">Roblox</a><a href="gta.html">GTA</a><a href="minecraft.html">Minecraft</a></nav><button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button></header>
+<main class="wrap">
+  <section class="hero"><div><p class="eyebrow">THE GAMING COMMUNITY</p><h1>News for people<br>who <span class="accent">play.</span></h1><p class="muted">Updates, stories and community talk from the games you care about.</p><a class="button" href="#latest">Explore latest news</a></div><div class="hero-side"><span class="live-dot"></span> YOUR DAILY GAMING HUB <div class="hero-big">GN</div><p class="muted small">Gaming news. No extra noise.</p></div></section>
+  <section class="section"><div class="section-head"><div><p class="eyebrow">BROWSE BY GAME</p><h2>Pick your game</h2></div></div><div class="game-grid">
+    <a class="game-card roblox" href="roblox.html"><span class="game-tag">ROBLOX</span><h3>Roblox</h3><p>Updates, experiences and creator news</p><span class="card-arrow">↗</span></a>
+    <a class="game-card gta" href="gta.html"><span class="game-tag">ROCKSTAR</span><h3>GTA</h3><p>Grand Theft Auto news and updates</p><span class="card-arrow">↗</span></a>
+    <a class="game-card minecraft" href="minecraft.html"><span class="game-tag">MOJANG</span><h3>Minecraft</h3><p>New features, builds and community</p><span class="card-arrow">↗</span></a>
+  </div></section>
+  <section class="section" id="latest"><div class="section-head"><div><p class="eyebrow">FRESH FROM THE COMMUNITY</p><h2>Latest news</h2></div><button class="text-btn" id="openPost">＋ Post news</button></div><div id="newsList" class="news-list"></div></section>
+  <section class="section community"><div><p class="eyebrow">HAVE SOMETHING TO SAY?</p><h2>Be part of the conversation.</h2><p class="muted">Share a gaming story, react to news and talk with other players.</p></div><button class="button" id="openPost2">Create a post</button></section>
+</main>
+<footer><a class="brand" href="index.html"><span class="brand-mark">GN</span><span>Gamers<span class="accent">News</span></span></a><span class="muted small">Made for gamers. Community-powered.</span></footer>
+<dialog id="postDialog"><form id="postForm"><div class="dialog-head"><h2>Publish a story</h2><button type="button" class="close" id="closePost">×</button></div><label>Your headline<input name="title" maxlength="100" required placeholder="What's happening?"></label><label>Game<select name="game"><option>Roblox</option><option>GTA</option><option>Minecraft</option><option>Other</option></select></label><label>Story<textarea name="body" rows="5" maxlength="1500" required placeholder="Write your news or opinion..."></textarea></label><button class="button" type="submit">Publish post</button><p class="small muted">Demo mode: posts are saved on this device only.</p></form></dialog>
+<script src="app.js"></script></body></html>
