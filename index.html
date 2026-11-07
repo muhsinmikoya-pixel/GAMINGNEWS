@@ -1,65 +1,8 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#090b12">
-  <meta name="description" content="Blox Cataloh — Roblox news, game updates, creator stories and community highlights.">
-  <title>Blox Cataloh — Roblox, uncovered.</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="announcement"><span class="pulse"></span> YOUR ROBLOX WORLD, ALL IN ONE PLACE <span class="announcement-right">INDEPENDENT FAN NEWS</span></div>
-  <header class="topbar">
-    <a class="brand" href="#home" aria-label="Blox Cataloh home"><span class="brand-icon">BC<span>✦</span></span><span>BLOX <b>CATALOH</b></span></a>
-    <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
-    <nav id="mainNav"><a class="active" href="#home">Home</a><a href="#latest">Latest stories</a><a href="#games">Games</a><a href="#sources">Official sources</a></nav>
-    <a class="nav-cta" href="#latest">Explore news <span>↗</span></a>
-  </header>
-
-  <main id="home">
-    <section class="hero wrap">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="eyebrow-line"></span> THE ROBLOX NEWSROOM</div>
-        <h1>ROBLOX NEVER<br>STANDS <span>STILL.</span></h1>
-        <p class="hero-desc">The updates, games, creators and stories shaping the Roblox universe. Stay curious. Stay in the know.</p>
-        <div class="hero-actions"><a class="btn btn-primary" href="#latest">Explore the latest <span>↗</span></a><a class="btn btn-quiet" href="#games">Browse games <span>↓</span></a></div>
-        <div class="hero-note"><span class="status-dot"></span> INDEPENDENT ROBLOX FAN PLATFORM <span class="note-divider">/</span> BUILT FOR PLAYERS</div>
-      </div>
-      <div class="hero-art" aria-label="Abstract gaming-inspired artwork">
-        <div class="art-glow"></div><div class="art-ring ring-one"></div><div class="art-ring ring-two"></div>
-        <div class="art-tile tile-back">B</div><div class="art-tile tile-front"><span>BC</span><small>PLAY. DISCOVER. REPEAT.</small></div>
-        <div class="art-label label-top">THE WORLD<br>KEEPS EVOLVING</div><div class="art-label label-bottom">ROBLOX / COMMUNITY / CULTURE</div>
-        <div class="art-spark spark-one">✳</div><div class="art-spark spark-two">✦</div>
-      </div>
-    </section>
-
-    <section class="ticker"><div class="ticker-track"><span>ROBLOX NEWS</span> ✦ <span>GAME UPDATES</span> ✦ <span>CREATOR SPOTLIGHTS</span> ✦ <span>COMMUNITY STORIES</span> ✦ <span>ROBLOX NEWS</span> ✦ <span>GAME UPDATES</span> ✦ <span>CREATOR SPOTLIGHTS</span> ✦ <span>COMMUNITY STORIES</span> ✦</div></section>
-
-    <section class="section wrap" id="latest">
-      <div class="section-heading"><div><div class="eyebrow">FRESH FROM THE UNIVERSE</div><h2>THE LATEST <span>DROP.</span></h2><p class="section-sub">Stories and guides for the games you can't stop playing.</p></div><button class="btn btn-outline" id="openPost">＋ Submit a story</button></div>
-      <div class="toolbar"><div class="filters" id="filters"><button class="filter active" data-filter="All">All stories</button><button class="filter" data-filter="Updates">Updates</button><button class="filter" data-filter="Games">Games</button><button class="filter" data-filter="Community">Community</button><button class="filter" data-filter="Guides">Guides</button></div><label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Search stories..." aria-label="Search stories"></label></div>
-      <div class="story-grid" id="storyGrid"></div>
-      <p class="feed-note">Blox Cataloh is an independent fan-made publication and is not affiliated with or endorsed by Roblox Corporation.</p>
-    </section>
-
-    <section class="section games-section" id="games"><div class="wrap"><div class="section-heading"><div><div class="eyebrow">FIND YOUR NEXT OBSESSION</div><h2>IN THE <span>SPOTLIGHT.</span></h2><p class="section-sub">Explore some of the experiences players are talking about.</p></div></div>
-      <div class="game-grid">
-        <a class="game-card game-blox" href="https://www.roblox.com/games/2753915549/Blox-Fruits" target="_blank" rel="noopener"><span class="game-number">01 / EXPERIENCE</span><span class="game-name">Blox Fruits</span><span class="game-arrow">↗</span></a>
-        <a class="game-card game-grow" href="https://www.roblox.com/games/126884695634066/Grow-a-Garden" target="_blank" rel="noopener"><span class="game-number">02 / EXPERIENCE</span><span class="game-name">Grow a Garden</span><span class="game-arrow">↗</span></a>
-        <a class="game-card game-adopt" href="https://www.roblox.com/games/920587237/Adopt-Me" target="_blank" rel="noopener"><span class="game-number">03 / EXPERIENCE</span><span class="game-name">Adopt Me!</span><span class="game-arrow">↗</span></a>
-      </div>
-    </div></section>
-
-    <section class="section wrap sources-section" id="sources"><div><div class="eyebrow">STRAIGHT FROM THE SOURCE</div><h2>CHECK THE <span>FACTS.</span></h2><p class="section-sub">For official announcements, updates and platform information, start here.</p></div><div class="source-links"><a href="https://corp.roblox.com/newsroom" target="_blank" rel="noopener"><span>Roblox Newsroom</span><b>↗</b></a><a href="https://devforum.roblox.com/" target="_blank" rel="noopener"><span>Roblox Developer Forum</span><b>↗</b></a><a href="https://status.roblox.com/" target="_blank" rel="noopener"><span>Roblox Status</span><b>↗</b></a></div></section>
-  </main>
-
-  <footer class="footer"><a class="brand" href="#home"><span class="brand-icon">BC<span>✦</span></span><span>BLOX <b>CATALOH</b></span></a><p>Independent Roblox fan news. Made for the community.</p><a href="#home" class="back-top">BACK TO TOP ↑</a></footer>
-
-  <dialog id="postDialog"><form id="postForm"><div class="dialog-head"><div><div class="eyebrow">COMMUNITY CONTRIBUTION</div><h2>SUBMIT A <span>STORY.</span></h2></div><button type="button" class="close" id="closePost" aria-label="Close">×</button></div><label>Story headline<input name="title" maxlength="100" required placeholder="Give your story a headline"></label><label>Category<select name="category"><option>Updates</option><option>Games</option><option>Community</option><option>Guides</option></select></label><label>Game (optional)<input name="game" maxlength="40" placeholder="e.g. Blox Fruits"></label><label>Your story<textarea name="body" rows="6" maxlength="1800" required placeholder="Share what's happening..."></textarea></label><button class="btn btn-primary submit-btn" type="submit">Save story <span>↗</span></button><p class="form-note">Demo mode: submissions are saved only in this browser for now. They are not published for other visitors.</p></form></dialog>
-  <script src="app.js"></script>
-</body>
-</html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#08080c"><meta name="description" content="Blox Cataloh — discover Roblox games, trending experiences and updates."><title>Blox Cataloh — Roblox Game Catalog</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head>
+<body><header class="topbar"><a class="brand" href="#home"><span class="brand-mark">◉</span><span>BLOX<span class="pink">CATALOH</span></span></a><button class="menu" id="menuBtn" aria-label="Menu">☰</button><nav id="nav"><a href="#games">GAMES</a><a href="#trending">TRENDING</a><a href="#news">NEWS</a></nav><a class="sign" href="https://www.roblox.com/login" target="_blank" rel="noopener">SIGN IN</a></header>
+<main id="home"><section class="hero wrap"><div class="hero-copy"><div class="eyebrow">✦ FEATURED GAME OF THE MONTH</div><h1>BLOX FRUITS</h1><p>Set sail on an adventure. Explore islands, master powerful abilities and build your own legend in one of Roblox's most popular experiences.</p><div class="hero-actions"><a class="play" href="https://www.roblox.com/games/2753915549/Blox-Fruits" target="_blank" rel="noopener">PLAY NOW <span>›</span></a><div class="players"><strong>450K+</strong><small>COMMUNITY SPOTLIGHT</small></div></div><small class="disclaimer">Explore the experience on Roblox. Player counts are not live.</small></div><a class="feature-art" href="https://www.roblox.com/games/2753915549/Blox-Fruits" target="_blank" rel="noopener" aria-label="Explore Blox Fruits"><span class="art-tag">FEATURED　 EXPERIENCE</span><div class="orb">✦</div><div class="feature-caption"><b>ADVENTURE AWAITS</b><span>Discover the world of Blox Fruits ↗</span></div></a></section>
+<section class="catalog wrap" id="games"><div class="section-head"><div><h2>↗ LATEST <span>GAMES</span></h2><p>Discover popular experiences on Roblox today.</p></div><label class="search">⌕ <input id="search" type="search" placeholder="Search catalog..." aria-label="Search catalog"></label></div><div class="filter-row"><span class="filter-label">⚑ FILTERS:</span><div id="filters"><button class="filter active" data-filter="All">ALL</button><button class="filter" data-filter="Action">ACTION</button><button class="filter" data-filter="Adventure">ADVENTURE</button><button class="filter" data-filter="Horror">HORROR</button><button class="filter" data-filter="Social">SOCIAL</button><button class="filter" data-filter="RPG">RPG</button></div></div><div class="games-grid" id="gamesGrid"></div><p class="empty" id="empty" hidden>No games found. Try another search or filter.</p></section>
+<section class="trending" id="trending"><div class="wrap"><div class="section-title"><div><div class="eyebrow">WHAT PLAYERS ARE CHECKING OUT</div><h2>NOW <span>TRENDING.</span></h2></div><span class="section-count">DISCOVER YOUR NEXT GAME ↗</span></div><div class="trend-row"><div class="trend-number">01</div><div><b>Blox Fruits</b><small>Adventure · Action · RPG</small></div><a href="https://www.roblox.com/games/2753915549/Blox-Fruits" target="_blank" rel="noopener">OPEN ↗</a></div><div class="trend-row"><div class="trend-number">02</div><div><b>Grow a Garden</b><small>Simulation · Social</small></div><a href="https://www.roblox.com/games/126884695634066/Grow-a-Garden" target="_blank" rel="noopener">OPEN ↗</a></div><div class="trend-row"><div class="trend-number">03</div><div><b>Brookhaven RP</b><small>Roleplay · Social</small></div><a href="https://www.roblox.com/games/4924922222/Brookhaven-RP" target="_blank" rel="noopener">OPEN ↗</a></div></div></section>
+<section class="news wrap" id="news"><div class="section-title"><div><div class="eyebrow">THE LATEST FROM THE PLATFORM</div><h2>ROBLOX <span>NEWS.</span></h2><p>Follow official announcements and platform updates.</p></div></div><div class="news-links"><a href="https://corp.roblox.com/newsroom" target="_blank" rel="noopener"><span><small>OFFICIAL SOURCE</small><b>Roblox Newsroom</b></span><strong>↗</strong></a><a href="https://devforum.roblox.com/" target="_blank" rel="noopener"><span><small>DEVELOPERS</small><b>Roblox DevForum</b></span><strong>↗</strong></a><a href="https://status.roblox.com/" target="_blank" rel="noopener"><span><small>PLATFORM STATUS</small><b>Roblox Status</b></span><strong>↗</strong></a></div></section></main>
+<footer><a class="brand" href="#home"><span class="brand-mark">◉</span><span>BLOX<span class="pink">CATALOH</span></span></a><p>Independent Roblox fan-made game catalog. Not affiliated with Roblox Corporation.</p><a href="#home">BACK TO TOP ↑</a></footer><script src="app.js"></script></body></html>
