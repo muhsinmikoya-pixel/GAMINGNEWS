@@ -1,25 +1,25 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 const supabase=createClient('https://feiyuiypwjddbypttwwj.supabase.co','sb_publishable_Qvqi5ZLdxSgohxzALB3rCA_Wx8FVV74');
 const fallbackGames=[
-{id:'blox',name:'Blox Fruits',genre:'Adventure',description:'Pirates · Fruits · RPG',symbol:'⚔',url:'https://www.roblox.com/games/2753915549/Blox-Fruits',thumbnail_url:'https://yupgames.io/_next/image?q=75&url=https%3A%2F%2Fs3.growsolutions.tech%2Fyupgames%2Fgames%2Fimages%2F1771909959321-Blox+Fruits.jpg&w=1080'},
+{id:'blox',name:'Blox Fruits',genre:'Adventure',description:'Pirates · Fruits · RPG',symbol:'⚔',url:'https://www.roblox.com/games/2753915549/Blox-Fruits',thumbnail_url:''},
 {id:'brookhaven',name:'Brookhaven RP',genre:'Social',description:'Roleplay · Social',symbol:'⌂',url:'https://www.roblox.com/games/4924922222/Brookhaven-RP',thumbnail_url:''},
 {id:'adopt',name:'Adopt Me!',genre:'Social',description:'Pets · Social',symbol:'♡',url:'https://www.roblox.com/games/920587237/Adopt-Me',thumbnail_url:''},
 {id:'murder',name:'Murder Mystery 2',genre:'Horror',description:'Mystery · Survival',symbol:'✦',url:'https://www.roblox.com/games/142823291/Murder-Mystery-2',thumbnail_url:''},
 {id:'grow',name:'Grow a Garden',genre:'Simulation',description:'Farming · Social',symbol:'✿',url:'https://www.roblox.com/games/126884695634066/Grow-a-Garden',thumbnail_url:''},
 {id:'doors',name:'DOORS',genre:'Horror',description:'Horror · Survival',symbol:'◈',url:'https://www.roblox.com/games/6516141723/DOORS',thumbnail_url:''},
 {id:'tower',name:'Tower of Hell',genre:'Action',description:'Obby · Challenge',symbol:'↟',url:'https://www.roblox.com/games/1962086868/Tower-of-Hell',thumbnail_url:''},
-{id:'king',name:'King Legacy',genre:'RPG',description:'Adventure · RPG',symbol:'♜',url:'https://www.roblox.com/games/4520749081/King-Legacy',thumbnail_url:''}
+{id:'king',name:'King Legacy',genre:'RPG',description:'Adventure · RPG',symbol:'♜',url:'https://www.roblox.com/games/4520749081/King-Legacy',thumbnail_url:''},\n{id:'rivals',name:'RIVALS',genre:'Action',description:'Competitive FPS',symbol:'✦',url:'https://www.roblox.com/games/17625359962/RIVALS',thumbnail_url:''},\n{id:'strongest',name:'The Strongest Battlegrounds',genre:'Action',description:'Anime fighting · PvP',symbol:'⚔',url:'https://www.roblox.com/games/10449761463/The-Strongest-Battlegrounds',thumbnail_url:''},\n{id:'brainrot',name:'Steal a Brainrot',genre:'Simulation',description:'Collect · Steal · Rebirth',symbol:'🧠',url:'https://www.roblox.com/games/102414667939238/Steal-a-Brainrot',thumbnail_url:''}
 ];
 let games=fallbackGames,activeFilter='All',query='',activeTopic='All',articles=[];
-const universeIds={ 'blox fruits':994732206,'brookhaven rp':1686885941,'adopt me!':383310974,'doors':2440500124,'grow a garden':7436755782,'the strongest battlegrounds':3808081382,'rivals':6035872082};
+const universeIds={ 'blox fruits':994732206,'brookhaven rp':1686885941,'adopt me!':383310974,'doors':2440500124,'grow a garden':7436755782,'the strongest battlegrounds':3808081382,'rivals':6035872082,'the strongest battlegrounds':3808081382};
 const grid=document.getElementById('gamesGrid'),empty=document.getElementById('empty');
 const officialIcons={};
 async function loadOfficialRobloxImages(){
  try{
   const ids=Object.values(universeIds).filter(Boolean).join(',');
-  const res=await fetch('https://thumbnails.roblox.com/v1/games/icons?universeIds='+ids+'&size=512x512&format=Png&isCircular=false');
+  const placeRes=await fetch('https://apis.roblox.com/universes/v1/places/102414667939238/universe');if(placeRes.ok){const placeData=await placeRes.json();if(placeData.universeId)universeIds['steal a brainrot']=placeData.universeId;}\n  const res=await fetch('https://thumbnails.roblox.com/v1/games/icons?universeIds='+Object.values(universeIds).filter(Boolean).join(',')+'&size=512x512&format=Png&isCircular=false');
   if(!res.ok)return;const json=await res.json();(json.data||[]).forEach(x=>{if(x.imageUrl)officialIcons[String(x.targetId)]=x.imageUrl;});
-  games=games.map(g=>{const key=String(g.name||'').toLowerCase();const id=universeIds[key];return id&&officialIcons[id]?{...g,thumbnail_url:officialIcons[id]}:g;});renderGames();renderArticles();
+  games=games.map(g=>{const key=String(g.name||'').toLowerCase();const matched=Object.keys(universeIds).find(k=>key.includes(k));const id=matched?universeIds[matched]:null;return id&&officialIcons[id]?{...g,thumbnail_url:officialIcons[id]}:g;});renderGames();renderArticles();
  }catch(e){console.warn('Official Roblox thumbnails could not load',e);}
 }
 const safe=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -28,7 +28,7 @@ function renderGames(){
  grid.innerHTML=filtered.map(g=>{const url=g.roblox_url||g.url||'#';const cover=g.thumbnail_url?'<img src="'+safe(g.thumbnail_url)+'" alt="'+safe(g.name)+' cover" loading="lazy">':'<span class="cover-symbol">'+safe(g.symbol||'✦')+'</span>';return '<article class="game-card"><a href="'+safe(url)+'" target="_blank" rel="noopener"><div class="game-cover">'+(g.featured?'<span class="cover-tag">FEATURED</span>':'')+cover+'</div><div class="game-info"><div><b>'+safe(g.name)+'</b><small>'+safe(g.description||g.genre||'Roblox experience')+'</small></div><span>↗</span></div></a></article>';}).join('');
  empty.hidden=filtered.length!==0;
 }
-function renderArticles(){
+function articleImage(a){if(a.game==='Blox Fruits'&&officialIcons['994732206'])return officialIcons['994732206'];return a.thumbnail_url||'';}\nfunction renderArticles(){
  const host=document.getElementById('articlesFeed');if(!host)return;
  const filtered=articles.filter(a=>activeTopic==='All'||a.game===activeTopic||(activeTopic==='Roblox'&&a.category?.toLowerCase().includes('roblox')));
  if(!filtered.length){host.innerHTML='<p class="muted">No stories in this category yet.</p>';return;}
