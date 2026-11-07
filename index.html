@@ -1,22 +1,65 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#171717"><meta name="description" content="Gaming news, updates and community talk.">
-  <title>GamersNews — Gaming, without the noise</title><link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090b12">
+  <meta name="description" content="Blox Cataloh — Roblox news, game updates, creator stories and community highlights.">
+  <title>Blox Cataloh — Roblox, uncovered.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">GN</span><span>Gamers<span class="accent">News</span></span></a><nav><a class="active" href="index.html">Home</a><a href="roblox.html">Roblox</a><a href="gta.html">GTA</a><a href="minecraft.html">Minecraft</a></nav><button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button></header>
-<main class="wrap">
-  <section class="hero"><div><p class="eyebrow">THE GAMING COMMUNITY</p><h1>News for people<br>who <span class="accent">play.</span></h1><p class="muted">Updates, stories and community talk from the games you care about.</p><a class="button" href="#latest">Explore latest news</a></div><div class="hero-side"><span class="live-dot"></span> YOUR DAILY GAMING HUB <div class="hero-big">GN</div><p class="muted small">Gaming news. No extra noise.</p></div></section>
-  <section class="section"><div class="section-head"><div><p class="eyebrow">BROWSE BY GAME</p><h2>Pick your game</h2></div></div><div class="game-grid">
-    <a class="game-card roblox" href="roblox.html"><span class="game-tag">ROBLOX</span><h3>Roblox</h3><p>Updates, experiences and creator news</p><span class="card-arrow">↗</span></a>
-    <a class="game-card gta" href="gta.html"><span class="game-tag">ROCKSTAR</span><h3>GTA</h3><p>Grand Theft Auto news and updates</p><span class="card-arrow">↗</span></a>
-    <a class="game-card minecraft" href="minecraft.html"><span class="game-tag">MOJANG</span><h3>Minecraft</h3><p>New features, builds and community</p><span class="card-arrow">↗</span></a>
-  </div></section>
-  <section class="section" id="latest"><div class="section-head"><div><p class="eyebrow">FRESH FROM THE COMMUNITY</p><h2>Latest news</h2></div><button class="text-btn" id="openPost">＋ Post news</button></div><div id="newsList" class="news-list"></div></section>
-  <section class="section community"><div><p class="eyebrow">HAVE SOMETHING TO SAY?</p><h2>Be part of the conversation.</h2><p class="muted">Share a gaming story, react to news and talk with other players.</p></div><button class="button" id="openPost2">Create a post</button></section>
-</main>
-<footer><a class="brand" href="index.html"><span class="brand-mark">GN</span><span>Gamers<span class="accent">News</span></span></a><span class="muted small">Made for gamers. Community-powered.</span></footer>
-<dialog id="postDialog"><form id="postForm"><div class="dialog-head"><h2>Publish a story</h2><button type="button" class="close" id="closePost">×</button></div><label>Your headline<input name="title" maxlength="100" required placeholder="What's happening?"></label><label>Game<select name="game"><option>Roblox</option><option>GTA</option><option>Minecraft</option><option>Other</option></select></label><label>Story<textarea name="body" rows="5" maxlength="1500" required placeholder="Write your news or opinion..."></textarea></label><button class="button" type="submit">Publish post</button><p class="small muted">Demo mode: posts are saved on this device only.</p></form></dialog>
-<script src="app.js"></script></body></html>
+  <div class="announcement"><span class="pulse"></span> YOUR ROBLOX WORLD, ALL IN ONE PLACE <span class="announcement-right">INDEPENDENT FAN NEWS</span></div>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Blox Cataloh home"><span class="brand-icon">BC<span>✦</span></span><span>BLOX <b>CATALOH</b></span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+    <nav id="mainNav"><a class="active" href="#home">Home</a><a href="#latest">Latest stories</a><a href="#games">Games</a><a href="#sources">Official sources</a></nav>
+    <a class="nav-cta" href="#latest">Explore news <span>↗</span></a>
+  </header>
+
+  <main id="home">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> THE ROBLOX NEWSROOM</div>
+        <h1>ROBLOX NEVER<br>STANDS <span>STILL.</span></h1>
+        <p class="hero-desc">The updates, games, creators and stories shaping the Roblox universe. Stay curious. Stay in the know.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#latest">Explore the latest <span>↗</span></a><a class="btn btn-quiet" href="#games">Browse games <span>↓</span></a></div>
+        <div class="hero-note"><span class="status-dot"></span> INDEPENDENT ROBLOX FAN PLATFORM <span class="note-divider">/</span> BUILT FOR PLAYERS</div>
+      </div>
+      <div class="hero-art" aria-label="Abstract gaming-inspired artwork">
+        <div class="art-glow"></div><div class="art-ring ring-one"></div><div class="art-ring ring-two"></div>
+        <div class="art-tile tile-back">B</div><div class="art-tile tile-front"><span>BC</span><small>PLAY. DISCOVER. REPEAT.</small></div>
+        <div class="art-label label-top">THE WORLD<br>KEEPS EVOLVING</div><div class="art-label label-bottom">ROBLOX / COMMUNITY / CULTURE</div>
+        <div class="art-spark spark-one">✳</div><div class="art-spark spark-two">✦</div>
+      </div>
+    </section>
+
+    <section class="ticker"><div class="ticker-track"><span>ROBLOX NEWS</span> ✦ <span>GAME UPDATES</span> ✦ <span>CREATOR SPOTLIGHTS</span> ✦ <span>COMMUNITY STORIES</span> ✦ <span>ROBLOX NEWS</span> ✦ <span>GAME UPDATES</span> ✦ <span>CREATOR SPOTLIGHTS</span> ✦ <span>COMMUNITY STORIES</span> ✦</div></section>
+
+    <section class="section wrap" id="latest">
+      <div class="section-heading"><div><div class="eyebrow">FRESH FROM THE UNIVERSE</div><h2>THE LATEST <span>DROP.</span></h2><p class="section-sub">Stories and guides for the games you can't stop playing.</p></div><button class="btn btn-outline" id="openPost">＋ Submit a story</button></div>
+      <div class="toolbar"><div class="filters" id="filters"><button class="filter active" data-filter="All">All stories</button><button class="filter" data-filter="Updates">Updates</button><button class="filter" data-filter="Games">Games</button><button class="filter" data-filter="Community">Community</button><button class="filter" data-filter="Guides">Guides</button></div><label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Search stories..." aria-label="Search stories"></label></div>
+      <div class="story-grid" id="storyGrid"></div>
+      <p class="feed-note">Blox Cataloh is an independent fan-made publication and is not affiliated with or endorsed by Roblox Corporation.</p>
+    </section>
+
+    <section class="section games-section" id="games"><div class="wrap"><div class="section-heading"><div><div class="eyebrow">FIND YOUR NEXT OBSESSION</div><h2>IN THE <span>SPOTLIGHT.</span></h2><p class="section-sub">Explore some of the experiences players are talking about.</p></div></div>
+      <div class="game-grid">
+        <a class="game-card game-blox" href="https://www.roblox.com/games/2753915549/Blox-Fruits" target="_blank" rel="noopener"><span class="game-number">01 / EXPERIENCE</span><span class="game-name">Blox Fruits</span><span class="game-arrow">↗</span></a>
+        <a class="game-card game-grow" href="https://www.roblox.com/games/126884695634066/Grow-a-Garden" target="_blank" rel="noopener"><span class="game-number">02 / EXPERIENCE</span><span class="game-name">Grow a Garden</span><span class="game-arrow">↗</span></a>
+        <a class="game-card game-adopt" href="https://www.roblox.com/games/920587237/Adopt-Me" target="_blank" rel="noopener"><span class="game-number">03 / EXPERIENCE</span><span class="game-name">Adopt Me!</span><span class="game-arrow">↗</span></a>
+      </div>
+    </div></section>
+
+    <section class="section wrap sources-section" id="sources"><div><div class="eyebrow">STRAIGHT FROM THE SOURCE</div><h2>CHECK THE <span>FACTS.</span></h2><p class="section-sub">For official announcements, updates and platform information, start here.</p></div><div class="source-links"><a href="https://corp.roblox.com/newsroom" target="_blank" rel="noopener"><span>Roblox Newsroom</span><b>↗</b></a><a href="https://devforum.roblox.com/" target="_blank" rel="noopener"><span>Roblox Developer Forum</span><b>↗</b></a><a href="https://status.roblox.com/" target="_blank" rel="noopener"><span>Roblox Status</span><b>↗</b></a></div></section>
+  </main>
+
+  <footer class="footer"><a class="brand" href="#home"><span class="brand-icon">BC<span>✦</span></span><span>BLOX <b>CATALOH</b></span></a><p>Independent Roblox fan news. Made for the community.</p><a href="#home" class="back-top">BACK TO TOP ↑</a></footer>
+
+  <dialog id="postDialog"><form id="postForm"><div class="dialog-head"><div><div class="eyebrow">COMMUNITY CONTRIBUTION</div><h2>SUBMIT A <span>STORY.</span></h2></div><button type="button" class="close" id="closePost" aria-label="Close">×</button></div><label>Story headline<input name="title" maxlength="100" required placeholder="Give your story a headline"></label><label>Category<select name="category"><option>Updates</option><option>Games</option><option>Community</option><option>Guides</option></select></label><label>Game (optional)<input name="game" maxlength="40" placeholder="e.g. Blox Fruits"></label><label>Your story<textarea name="body" rows="6" maxlength="1800" required placeholder="Share what's happening..."></textarea></label><button class="btn btn-primary submit-btn" type="submit">Save story <span>↗</span></button><p class="form-note">Demo mode: submissions are saved only in this browser for now. They are not published for other visitors.</p></form></dialog>
+  <script src="app.js"></script>
+</body>
+</html>
