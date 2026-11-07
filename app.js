@@ -35,7 +35,7 @@ function renderGames(){
  grid.innerHTML=filtered.map(g=>{const url=g.roblox_url||g.url||'#';const cover=g.thumbnail_url?'<img src="'+safe(g.thumbnail_url)+'" alt="'+safe(g.name)+' cover" loading="lazy">':'<span class="cover-symbol">'+safe(g.symbol||'✦')+'</span>';return '<article class="game-card"><a href="'+safe(url)+'" target="_blank" rel="noopener"><div class="game-cover">'+(g.featured?'<span class="cover-tag">FEATURED</span>':'')+cover+'</div><div class="game-info"><div><b>'+safe(g.name)+'</b><small>'+safe(g.description||g.genre||'Roblox experience')+'</small></div><span>↗</span></div></a></article>';}).join('');
  empty.hidden=filtered.length!==0;
 }
-function articleImage(a){if(a.game==='Blox Fruits'&&universeIds['Blox Fruits']&&officialIcons[String(universeIds['Blox Fruits'])])return officialIcons[String(universeIds['Blox Fruits'])];return a.thumbnail_url||'';}
+function articleImage(a){const game=String(a.game||'').toLowerCase();const key=Object.keys(robloxPlaceIds).find(k=>game.includes(k.toLowerCase())||k.toLowerCase().includes(game));const id=key?universeIds[key]:null;if(id&&officialIcons[String(id)])return officialIcons[String(id)];return a.thumbnail_url||'';}
 function renderArticles(){
  const host=document.getElementById('articlesFeed');if(!host)return;
  const filtered=articles.filter(a=>activeTopic==='All'||a.game===activeTopic||(activeTopic==='Roblox'&&a.category?.toLowerCase().includes('roblox')));
