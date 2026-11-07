@@ -28,3 +28,12 @@ document.getElementById('search').addEventListener('input',e=>{query=e.target.va
 document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('nav').classList.toggle('open'));
 document.getElementById('nav').addEventListener('click',e=>{if(e.target.closest('a'))document.getElementById('nav').classList.remove('open');});
 render();loadGames();supabase.channel('public-games-feed').on('postgres_changes',{event:'*',schema:'public',table:'games'},loadGames).subscribe();
+async function loadArticles(){
+ const host=document.getElementById('articlesFeed'); if(!host)return;
+ const {data,error}=await supabase.from('articles').select('id,title,summary,category,game,published_at').eq('status','published').order('published_at',{ascending:false}).limit(6);
+ if(error){host.innerHTML='<p>News feed is temporarily unavailable.</p>';return;}
+ if(!data?.length){host.innerHTML='<p class="muted">New community stories will appear here when published.</p>';return;}
+ host.innerHTML=data.map(a=>'<a href="/article.html?id='+encodeURIComponent(a.id)+'"><span><small>'+safe(a.category)+' · '+safe(a.game)+'</small><b>'+safe(a.title)+'</b><small>'+safe(a.summary)+'</small></span><strong>↗</strong></a>').join('');
+}
+loadArticles();
+supabase.channel('public-articles-feed').on('postgres_changes',{event:'*',schema:'public',table:'articles'},loadArticles).subscribe();
