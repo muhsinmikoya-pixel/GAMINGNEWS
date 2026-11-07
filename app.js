@@ -11,7 +11,17 @@ const fallbackGames=[
 {id:'king',name:'King Legacy',genre:'RPG',description:'Adventure · RPG',symbol:'♜',url:'https://www.roblox.com/games/4520749081/King-Legacy',thumbnail_url:''}
 ];
 let games=fallbackGames,activeFilter='All',query='',activeTopic='All',articles=[];
+const universeIds={ 'blox fruits':994732206,'brookhaven rp':1686885941,'adopt me!':383310974,'doors':2440500124,'grow a garden':7436755782,'the strongest battlegrounds':3808081382,'rivals':6035872082,'steal a brainrot':0,'murder mystery 2':
 const grid=document.getElementById('gamesGrid'),empty=document.getElementById('empty');
+const officialIcons={};
+async function loadOfficialRobloxImages(){
+ try{
+  const ids=Object.values(universeIds).filter(Boolean).join(',');
+  const res=await fetch('https://thumbnails.roblox.com/v1/games/icons?universeIds='+ids+'&size=512x512&format=Png&isCircular=false');
+  if(!res.ok)return;const json=await res.json();(json.data||[]).forEach(x=>{if(x.imageUrl)officialIcons[String(x.targetId)]=x.imageUrl;});
+  games=games.map(g=>{const key=String(g.name||'').toLowerCase();const id=universeIds[key];return id&&officialIcons[id]?{...g,thumbnail_url:officialIcons[id]}:g;});renderGames();renderArticles();
+ }catch(e){console.warn('Official Roblox thumbnails could not load',e);}
+}
 const safe=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function renderGames(){
  const filtered=games.filter(g=>(activeFilter==='All'||String(g.genre||'').toLowerCase().includes(activeFilter.toLowerCase()))&&(g.name+' '+g.description+' '+g.genre).toLowerCase().includes(query));
@@ -22,7 +32,7 @@ function renderArticles(){
  const host=document.getElementById('articlesFeed');if(!host)return;
  const filtered=articles.filter(a=>activeTopic==='All'||a.game===activeTopic||(activeTopic==='Roblox'&&a.category?.toLowerCase().includes('roblox')));
  if(!filtered.length){host.innerHTML='<p class="muted">No stories in this category yet.</p>';return;}
- host.innerHTML=filtered.map(a=>'<article class="article-card"><a class="article-image" href="/article.html?id='+encodeURIComponent(a.id)+'">'+(a.thumbnail_url?'<img src="'+safe(a.thumbnail_url)+'" alt="'+safe(a.title)+'" loading="lazy">':'<span>GAMER NEWS</span>')+'<small>'+safe(a.category)+'</small></a><div class="article-copy"><div class="article-meta">'+safe(a.game)+' <i>·</i> '+(a.published_at?new Date(a.published_at).toLocaleDateString():'LATEST')+'</div><h3><a href="/article.html?id='+encodeURIComponent(a.id)+'">'+safe(a.title)+'</a></h3><p>'+safe(a.summary)+'</p><a class="read-more" href="/article.html?id='+encodeURIComponent(a.id)+'">READ STORY ↗</a></div></article>').join('');
+ host.innerHTML=filtered.map(a=>'<article class="article-card"><a class="article-image" href="/article.html?id='+encodeURIComponent(a.id)+'">'+(articleImage(a)?'<img src="'+safe(articleImage(a))+'" alt="'+safe(a.title)+'" loading="lazy">':'<span>GAMER NEWS</span>')+'<small>'+safe(a.category)+'</small></a><div class="article-copy"><div class="article-meta">'+safe(a.game)+' <i>·</i> '+(a.published_at?new Date(a.published_at).toLocaleDateString():'LATEST')+'</div><h3><a href="/article.html?id='+encodeURIComponent(a.id)+'">'+safe(a.title)+'</a></h3><p>'+safe(a.summary)+'</p><a class="read-more" href="/article.html?id='+encodeURIComponent(a.id)+'">READ STORY ↗</a></div></article>').join('');
 }
 async function loadGames(){
  const {data,error}=await supabase.from('games').select('id,name,genre,description,thumbnail_url,roblox_url,featured').eq('published',true).order('sort_order').order('name');
@@ -39,6 +49,6 @@ document.getElementById('menuBtn').addEventListener('click',()=>document.getElem
 document.getElementById('nav').addEventListener('click',e=>{if(e.target.closest('a'))document.getElementById('nav').classList.remove('open');});
 document.getElementById('topicTabs').addEventListener('click',e=>{const b=e.target.closest('[data-topic]');if(!b)return;activeTopic=b.dataset.topic;document.querySelectorAll('.topic').forEach(x=>x.classList.toggle('active',x===b));renderArticles();});
 document.querySelectorAll('[data-jump-topic]').forEach(b=>b.addEventListener('click',()=>{activeTopic=b.dataset.jumpTopic;document.querySelectorAll('.topic').forEach(x=>x.classList.toggle('active',x.dataset.topic===activeTopic));renderArticles();}));
-renderGames();loadGames();loadArticles();
+renderGames();loadGames();loadArticles();loadOfficialRobloxImages();
 supabase.channel('public-games-feed').on('postgres_changes',{event:'*',schema:'public',table:'games'},loadGames).subscribe();
 supabase.channel('public-articles-feed').on('postgres_changes',{event:'*',schema:'public',table:'articles'},loadArticles).subscribe();
