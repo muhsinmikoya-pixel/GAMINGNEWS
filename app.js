@@ -11,7 +11,7 @@ const fallbackGames=[
 {id:'king',name:'King Legacy',genre:'RPG',description:'Adventure · RPG',symbol:'♜',url:'https://www.roblox.com/games/4520749081/King-Legacy',thumbnail_url:''}
 ];
 let games=fallbackGames,activeFilter='All',query='',activeTopic='All',articles=[];
-const universeIds={ 'blox fruits':994732206,'brookhaven rp':1686885941,'adopt me!':383310974,'doors':2440500124,'grow a garden':7436755782,'the strongest battlegrounds':3808081382,'rivals':6035872082,'steal a brainrot':0,'murder mystery 2':
+const universeIds={ 'blox fruits':994732206,'brookhaven rp':1686885941,'adopt me!':383310974,'doors':2440500124,'grow a garden':7436755782,'the strongest battlegrounds':3808081382,'rivals':6035872082,'king legacy':
 const grid=document.getElementById('gamesGrid'),empty=document.getElementById('empty');
 const officialIcons={};
 async function loadOfficialRobloxImages(){
