@@ -1,6 +1,7 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 const db=createClient('https://feiyuiypwjddbypttwwj.supabase.co','sb_publishable_Qvqi5ZLdxSgohxzALB3rCA_Wx8FVV74');
-const $=s=>document.querySelector(s);\n$('#menuBtn').addEventListener('click',()=>$('#nav').classList.toggle('open'));\n$('#nav').addEventListener('click',e=>{if(e.target.closest('a'))$('#nav').classList.remove('open');});
+const $=s=>document.querySelector(s);
+$('#menuBtn').addEventListener('click',()=>$('#nav').classList.toggle('open'));\n$('#nav').addEventListener('click',e=>{if(e.target.closest('a'))$('#nav').classList.remove('open');});
 const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let currentUser=null,isAdmin=false;
 function status(sel,msg){$(sel).textContent=msg;}
@@ -51,4 +52,5 @@ async function showEntries(id){
  status('#manageStatus',(data||[]).map((x,i)=>(i+1)+'. '+x.roblox_username+' — '+new Date(x.created_at).toLocaleString()).join('\n')||'No entries yet.');
 }
 db.auth.onAuthStateChange(()=>{});
-loadGiveaways();checkAdmin();\ndb.channel('giveaway-feed').on('postgres_changes',{event:'*',schema:'public',table:'giveaways'},loadGiveaways).subscribe();
+loadGiveaways();checkAdmin();
+db.channel('giveaway-feed').on('postgres_changes',{event:'*',schema:'public',table:'giveaways'},loadGiveaways).subscribe();
