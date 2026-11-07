@@ -1,0 +1,3 @@
+[build]
+  command = "echo \"Blox Cataloh static site ready\""
+  publish = "."
