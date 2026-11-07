@@ -14,7 +14,20 @@ const fallbackGames=[
 {id:'brainrot',name:'Steal a Brainrot',genre:'Simulation',description:'Collect · Steal · Rebirth',symbol:'🧠',url:'https://www.roblox.com/games/102414667939238/Steal-a-Brainrot',thumbnail_url:''}
 ];
 let games=fallbackGames,activeFilter='All',query='',activeTopic='All',articles=[];
-const universeIds={ 'blox fruits':994732206,'brookhaven rp':1686885941,'adopt me!':383310974,'doors':2440500124,'grow a garden':7436755782,'the strongest battlegrounds':3808081382,'rivals':6035872082};
+const robloxPlaceIds={'Blox Fruits':2753915549,'Brookhaven RP':4924922222,'Adopt Me!':920587237,'Murder Mystery 2':142823291,'Grow a Garden':126884695634066,'DOORS':6516141723,'Tower of Hell':1962086868,'King Legacy':4520749081,'RIVALS':17625359962,'The Strongest Battlegrounds':10449761463,'Steal a Brainrot':102414667939238};
+const universeIds={},officialIcons={};
+async function resolveUniverse(placeId){try{const r=await fetch('https://apis.roblox.com/universes/v1/places/'+placeId+'/universe');if(!r.ok)return null;const j=await r.json();return j.universeId||null;}catch{return null;}}
+async function loadOfficialRobloxImages(){
+ const pairs=await Promise.all(Object.entries(robloxPlaceIds).map(async([name,place])=>[name,await resolveUniverse(place)]));
+ pairs.forEach(([name,id])=>{if(id)universeIds[name]=id;});
+ const ids=[...new Set(Object.values(universeIds))];if(!ids.length)return;
+ try{const r=await fetch('https://thumbnails.roblox.com/v1/games/icons?universeIds='+ids.join(',')+'&size=512x512&format=Png&isCircular=false');if(!r.ok)throw new Error('Roblox image service unavailable');
+ const j=await r.json();(j.data||[]).forEach(x=>{if(x.imageUrl)officialIcons[String(x.targetId)]=x.imageUrl;});
+ games=games.map(g=>{const id=universeIds[g.name];return id&&officialIcons[String(id)]?{...g,thumbnail_url:officialIcons[String(id)]}:g;});
+ document.querySelectorAll('[data-roblox-place]').forEach(img=>{const place=img.getAttribute('data-roblox-place');const name=Object.keys(robloxPlaceIds).find(k=>String(robloxPlaceIds[k])===String(place));const id=name?universeIds[name]:null;if(id&&officialIcons[String(id)]){img.src=officialIcons[String(id)];img.addEventListener('error',()=>{img.style.display='none';},{once:true});}});
+ renderGames();renderArticles();
+ }catch(err){console.warn('Roblox official images unavailable',err);}
+}
 const grid=document.getElementById('gamesGrid'),empty=document.getElementById('empty');
 const officialIcons={};
 async function loadOfficialRobloxImages(){
@@ -32,7 +45,7 @@ function renderGames(){
  grid.innerHTML=filtered.map(g=>{const url=g.roblox_url||g.url||'#';const cover=g.thumbnail_url?'<img src="'+safe(g.thumbnail_url)+'" alt="'+safe(g.name)+' cover" loading="lazy">':'<span class="cover-symbol">'+safe(g.symbol||'✦')+'</span>';return '<article class="game-card"><a href="'+safe(url)+'" target="_blank" rel="noopener"><div class="game-cover">'+(g.featured?'<span class="cover-tag">FEATURED</span>':'')+cover+'</div><div class="game-info"><div><b>'+safe(g.name)+'</b><small>'+safe(g.description||g.genre||'Roblox experience')+'</small></div><span>↗</span></div></a></article>';}).join('');
  empty.hidden=filtered.length!==0;
 }
-function articleImage(a){if(a.game==='Blox Fruits'&&officialIcons['994732206'])return officialIcons['994732206'];return a.thumbnail_url||'';}
+function articleImage(a){if(a.game==='Blox Fruits'&&universeIds['Blox Fruits']&&officialIcons[String(universeIds['Blox Fruits'])])return officialIcons[String(universeIds['Blox Fruits'])];return a.thumbnail_url||'';}
 function renderArticles(){
  const host=document.getElementById('articlesFeed');if(!host)return;
  const filtered=articles.filter(a=>activeTopic==='All'||a.game===activeTopic||(activeTopic==='Roblox'&&a.category?.toLowerCase().includes('roblox')));
@@ -57,3 +70,5 @@ document.querySelectorAll('[data-jump-topic]').forEach(b=>b.addEventListener('cl
 renderGames();loadGames();loadArticles();loadOfficialRobloxImages();
 supabase.channel('public-games-feed').on('postgres_changes',{event:'*',schema:'public',table:'games'},loadGames).subscribe();
 supabase.channel('public-articles-feed').on('postgres_changes',{event:'*',schema:'public',table:'articles'},loadArticles).subscribe();
+
+document.addEventListener('error',e=>{if(e.target&&e.target.tagName==='IMG'){e.target.style.display='none';}},true);
