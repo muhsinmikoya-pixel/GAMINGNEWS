@@ -1,7 +1,8 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 const db=createClient('https://feiyuiypwjddbypttwwj.supabase.co','sb_publishable_Qvqi5ZLdxSgohxzALB3rCA_Wx8FVV74');
 const $=s=>document.querySelector(s);
-$('#menuBtn').addEventListener('click',()=>$('#nav').classList.toggle('open'));\n$('#nav').addEventListener('click',e=>{if(e.target.closest('a'))$('#nav').classList.remove('open');});
+$('#menuBtn').addEventListener('click',()=>$('#nav').classList.toggle('open'));
+$('#nav').addEventListener('click',e=>{if(e.target.closest('a'))$('#nav').classList.remove('open');});
 const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let currentUser=null,isAdmin=false;
 function status(sel,msg){$(sel).textContent=msg;}
