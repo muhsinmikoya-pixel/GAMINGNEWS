@@ -29,16 +29,6 @@ async function loadOfficialRobloxImages(){
  }catch(err){console.warn('Roblox official images unavailable',err);}
 }
 const grid=document.getElementById('gamesGrid'),empty=document.getElementById('empty');
-const officialIcons={};
-async function loadOfficialRobloxImages(){
- try{
-  const ids=Object.values(universeIds).filter(Boolean).join(',');
-  const placeRes=await fetch('https://apis.roblox.com/universes/v1/places/102414667939238/universe');if(placeRes.ok){const placeData=await placeRes.json();if(placeData.universeId)universeIds['steal a brainrot']=placeData.universeId;}
-  const res=await fetch('https://thumbnails.roblox.com/v1/games/icons?universeIds='+Object.values(universeIds).filter(Boolean).join(',')+'&size=512x512&format=Png&isCircular=false');
-  if(!res.ok)return;const json=await res.json();(json.data||[]).forEach(x=>{if(x.imageUrl)officialIcons[String(x.targetId)]=x.imageUrl;});
-  games=games.map(g=>{const key=String(g.name||'').toLowerCase();const matched=Object.keys(universeIds).find(k=>key.includes(k));const id=matched?universeIds[matched]:null;return id&&officialIcons[id]?{...g,thumbnail_url:officialIcons[id]}:g;});renderGames();renderArticles();
- }catch(e){console.warn('Official Roblox thumbnails could not load',e);}
-}
 const safe=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function renderGames(){
  const filtered=games.filter(g=>(activeFilter==='All'||String(g.genre||'').toLowerCase().includes(activeFilter.toLowerCase()))&&(g.name+' '+g.description+' '+g.genre).toLowerCase().includes(query));
